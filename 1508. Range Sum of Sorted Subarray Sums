@@ -1,0 +1,33 @@
+#include <vector>
+#include <algorithm>
+
+class Solution {
+public:
+    int rangeSum(vector<int>& nums, int n, int left, int right) {
+       
+        vector<int> subarraySums(n * (n + 1) / 2);
+        int k = 0; // Index for inserting into subarraySums
+      
+       
+        for (int start = 0; start < n; ++start) {
+            int currentSum = 0; // Stores the sum of the current subarray
+            for (int end = start; end < n; ++end) {
+                currentSum += nums[end]; // Add the next element to the currentSum
+                subarraySums[k++] = currentSum; // Store the sum of the subarray
+            }
+        }
+      
+        
+        sort(subarraySums.begin(), subarraySums.end());
+      
+        int answer = 0; // Variable to store the final answer
+        const int mod = 1e9 + 7; // The modulo value
+      
+        
+        for (int i = left - 1; i < right; ++i) {
+            answer = (answer + subarraySums[i]) % mod; // Aggregate the sum modulo mod
+        }
+      
+        return answer; // Return the final calculated sum
+    }
+};
