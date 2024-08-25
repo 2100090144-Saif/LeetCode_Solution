@@ -1,0 +1,16 @@
+#include <vector>
+#include <algorithm>
+
+class Solution {
+public:
+    int findDuplicate(std::vector<int>& num) {
+            int n = num.size();
+            std::sort(num.begin(), num.end());
+            for (int i = 0; i < n - 1; i++) {
+             if (num[i] == num[i + 1]) {
+             return num[i];
+        }
+    }
+    return -1; // Return -1 if no duplicate is found (though the problem guarantees a duplicate)
+    }
+};
